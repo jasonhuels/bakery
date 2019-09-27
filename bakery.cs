@@ -13,18 +13,20 @@ class Program
         bool Shopping = true;
 
         Console.WriteLine("\nWelcome to Pierre's Bakery!\n");
+        ShowMenu();
         while(Shopping)
         {
-            Console.WriteLine("Would you like to do?");
-            Console.WriteLine("[menu, cart, shop, checkout, leave]");
+            Console.WriteLine("\nWould you like to do?");
+            Console.WriteLine("[menu, cart, shop, checkout, leave]\n");
             InputString = Console.ReadLine();
             switch(InputString.ToLower())
             {
                 case "leave":
+                    Console.WriteLine("Thanks for coming to Pierre's Bakery! Goodbye.");
                     Shopping = false;
                     break;
                 case "menu":
-                    PrintMenu();
+                    ShowMenu();
                     break;
                 case "cart":
                     ShowCart(Cart);
@@ -33,17 +35,19 @@ class Program
                     Cart = Shop(Cart);
                     break;
                 case "checkout":
+                    Checkout(Cart);
+                    Cart["bread"] = 0;
+                    Cart["pastry"] = 0;
+                    ShowCart(Cart);
                     break;
                 default:
                     Console.WriteLine("I don't understand that command.\n");
                     break;
-
             }           
-        }
-        
+        }       
     }
 
-    static void PrintMenu()
+    static void ShowMenu()
     {   
         Console.WriteLine("\n*_*_*_*_*_*_*_Menu_*_*_*_*_*_*_*");
         Console.WriteLine("Bread: 1 Loaf: $5 /// Buy 2 get 1 Free.");
@@ -67,6 +71,7 @@ class Program
             
             if(int.TryParse(InputString, out Quantity))
             {
+      
                 if(Cart[Cart.ElementAt(i).Key] + Quantity > 0)
                 {
                     Cart[Cart.ElementAt(i).Key] += Quantity;
@@ -91,4 +96,12 @@ class Program
         return Cart;
     }
 
+    static void Checkout(Dictionary<string, int> Cart)
+    {
+        int total = 0;
+        Bread bread = new Bread();
+        Pastry pastry = new Pastry();
+        total = bread.GetCost(Cart["bread"]) + pastry.GetCost(Cart["pastry"]);
+        Console.WriteLine("Your total for {0} bread and {1} pastry will be ${2}.", Cart["bread"], Cart["pastry"], total);
+    }
 }
