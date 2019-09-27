@@ -81,11 +81,9 @@ class Program
         for(int i=0; i<Cart.Count; i++)
         {
             Console.WriteLine("How many {0} would you like?", Cart.ElementAt(i).Key);
-            InputString = Console.ReadLine();
-            
+            InputString = Console.ReadLine();          
             if(int.TryParse(InputString, out Quantity))
             {
-      
                 if(Cart[Cart.ElementAt(i).Key] + Quantity > 0)
                 {
                     Cart[Cart.ElementAt(i).Key] += Quantity;
@@ -98,8 +96,7 @@ class Program
                 else
                 {
                     Console.WriteLine("You can't have a negative amount of {0} in your cart.", Cart.ElementAt(i).Key);
-                }
-                
+                }        
             } 
             else
             {
