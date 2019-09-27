@@ -16,7 +16,7 @@ class Program
         ShowMenu();
         while(Shopping)
         {
-            Console.WriteLine("\nWould you like to do?");
+            Console.WriteLine("\nWhat would you like to do?");
             Console.WriteLine("[menu, cart, shop, checkout, leave]\n");
             InputString = Console.ReadLine();
             switch(InputString.ToLower())
@@ -40,6 +40,10 @@ class Program
                     Cart["pastry"] = 0;
                     ShowCart(Cart);
                     break;
+                case "steal":
+                    Console.WriteLine("Pierre does not take kindly to shoplifters. You are kicked out of the Bakery.");
+                    Shopping = false;
+                    break;
                 default:
                     Console.WriteLine("I don't understand that command.\n");
                     break;
@@ -49,9 +53,13 @@ class Program
 
     static void ShowMenu()
     {   
-        Console.WriteLine("\n*_*_*_*_*_*_*_Menu_*_*_*_*_*_*_*");
-        Console.WriteLine("Bread: 1 Loaf: $5 /// Buy 2 get 1 Free.");
-        Console.WriteLine("Pastries: 1 Pastry: $2 /// 3 Pastries: $5\n");        
+        Console.WriteLine("\n*_*_*_*_*_*_*_ Menu _*_*_*_*_*_*_*\n");
+        Console.WriteLine("Bread                     Pastries");
+        Console.WriteLine("1 for $5                  1 for $2");
+        Console.WriteLine("Buy 2 Get 1 Free          3 for $5");
+        Console.WriteLine("\n*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*");
+        // Console.WriteLine("Bread: 1 Loaf: $5 /// Buy 2 get 1 Free.");
+        // Console.WriteLine("Pastries: 1 Pastry: $2 /// 3 Pastries: $5\n");        
     }
 
     static void ShowCart(Dictionary<string, int> Cart)
